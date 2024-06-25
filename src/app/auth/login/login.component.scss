@@ -1,0 +1,49 @@
+form{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+    padding: 50px 30px;
+    background-color: white;
+    h1{
+      color:  #ff6464;
+      text-align: center;
+    }
+    .third_party_signIn{
+        .icons{
+            padding: 15px;
+            border-radius: 100%;
+            border: 1px solid darkgrey;
+            font-size: 17px;
+            color: rgb(79, 79, 79);
+            margin: 20px 15px;
+        }
+        .iconss{
+            border: 1px solid darkgrey;
+            border-radius: 100%;
+            padding: 15px;
+            font-size: 20px;
+            color: rgb(79, 79, 79);
+            margin: 20px 15px;
+        }
+    }
+    p{
+        color: rgb(156,156,156);
+        font-size: 14px;
+        margin: 0px;
+    }
+    .forget_password{
+        color: rgb(0,62,106);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .input_field{
+        margin: 20px 0;
+        background-color: rgb(237,235,236);
+    }
+    p-button{
+         margin-top: 30px;
+    }
+}
