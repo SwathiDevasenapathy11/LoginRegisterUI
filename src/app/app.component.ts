@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { FinalComponent } from './auth/final/final.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet , FinalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
