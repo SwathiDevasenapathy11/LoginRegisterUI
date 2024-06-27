@@ -1,26 +1,42 @@
-  <form>
+  <form [formGroup]="registerForm">
      <h1>Create Account</h1>
      <div class="inside_form">
        <p-iconField iconPosition="left">
           <p-inputIcon styleClass="pi pi-user"/>
-          <input type="text" pInputText placeholder="Username" class="input_area"/>
+          <input type="text" pInputText placeholder="Username" class="input_area" formControlName="name"/>
        </p-iconField>
+       <div class="err_msg" *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)">
+          <small>Username is required</small>
+       </div>
   
        <p-iconField iconPosition="left">
           <p-inputIcon styleClass="pi pi-envelope" />
-          <input type="email" pInputText placeholder="Email" class="input_area"/>
+          <input type="email" pInputText placeholder="Email" class="input_area" formControlName="email"/>
        </p-iconField>
+       <div class="err_msg" *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+           <small *ngIf="registerForm.get('email')!.errors?.['required']">Email is required</small>
+           <small *ngIf="registerForm.get('email')!.errors?.['email']">Invalid email address</small>
+       </div>
   
        <p-iconField iconPosition="left">
           <p-inputIcon styleClass="pi pi-lock" />
-          <input type="password" pInputText placeholder="Password" class="input_area"/>
+          <input type="password" pInputText placeholder="Password" class="input_area" formControlName="password"/>
        </p-iconField>
+       <div class="err_msg" *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+           <small *ngIf="registerForm.get('password')!.errors?.['required']">Password is required</small>
+           <small *ngIf="registerForm.get('password')?.errors?.['password']">Password is invalid</small>
+       </div>
   
        <p-iconField iconPosition="left">
           <p-inputIcon styleClass="pi pi-unlock" />
-          <input type="password" pInputText placeholder="Confirm Password" class="input_area"/>
+          <input type="password" pInputText placeholder="Confirm Password" class="input_area" formControlName="confirmPassword" />
        </p-iconField>
-       <p-button label="Sign Up" />
+       <div class="err_msg" *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.touched || registerForm.get('confirmPassword')?.dirty)">
+           <small *ngIf="registerForm.get('confirmPassword')!.errors?.['required']">Confirm Password is required</small>
+           <small *ngIf="registerForm.get('confirmPassword')!.errors?.['confirmPassword']">Must be 8 characters</small>
+       </div>
+       <p-button label="Sign Up" [disabled]="registerForm.disabled"/>
      </div>
   </form>
+  
   
