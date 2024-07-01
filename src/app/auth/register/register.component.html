@@ -3,7 +3,7 @@
      <div class="inside_form">
        <p-iconField iconPosition="left">
           <p-inputIcon styleClass="pi pi-user"/>
-          <input type="text" pInputText placeholder="Username" class="input_area" formControlName="name"/>
+          <input type="text" pInputText placeholder="Username" class="input_area" formControlName="username"/>
        </p-iconField>
        <div class="err_msg" *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)">
           <small>Username is required</small>
@@ -35,8 +35,7 @@
            <small *ngIf="registerForm.get('confirmPassword')!.errors?.['required']">Confirm Password is required</small>
            <small *ngIf="registerForm.get('confirmPassword')!.errors?.['confirmPassword']">Must be 8 characters</small>
        </div>
-       <p-button label="Sign Up" [disabled]="registerForm.disabled"/>
+       <p-button label="Sign Up" [disabled]="registerForm.disabled" (onClick)="addUser()"/>
      </div>
   </form>
-  
   
