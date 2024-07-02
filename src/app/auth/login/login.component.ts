@@ -5,7 +5,9 @@ import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
 import { RegisterComponent } from "../register/register.component";
 import { NgClass, NgIf } from '@angular/common';
-import { FormsModule, NgForm, NgModel } from '@angular/forms';
+import { FormGroup, FormsModule, NgForm, NgModel } from '@angular/forms';
+import { UserService } from '../service/user-service';
+import { AuthResponse, Login } from '../model/login';
 @Component({
     selector: 'app-login',
     standalone: true,
@@ -14,9 +16,35 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
     imports: [ ButtonModule, IconFieldModule, InputTextModule, InputIconModule, RegisterComponent , NgClass , FormsModule , NgIf ]
 })
 export class LoginComponent {
+    login! : Login;
+    loginForm! : FormGroup;
 
-    onSubmit(form: NgForm): void {
-        console.log(form); 
-      }
+    constructor(private userService : UserService){}
+
+    ngOnInit(){
+        // this.login = new Login();
+    }
+
+    authenticateInfo(loginForm: NgForm) {
+        if (loginForm.valid) {
+            this.login = loginForm.value;
+            this.userService.authenticate(this.login).subscribe(
+                (response: AuthResponse) => {
+                    console.log("Authenticated", response);
+                    localStorage.setItem('username' , response.username);
+                    localStorage.setItem('token' , response.token);
+                    localStorage.setItem('role' , response.role);
+                    localStorage.setItem('id', response.id.toString());
+                    loginForm.resetForm();
+                },
+                error => {
+                    console.error("Authentication failed", error);
+                    loginForm.resetForm();
+                }
+            );
+        } else {
+            loginForm.resetForm();
+        }
+    }
 
 }

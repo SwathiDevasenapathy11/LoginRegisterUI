@@ -1,4 +1,4 @@
-<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+<form #loginForm="ngForm">
     <h1>Sign in</h1>
     <div class="third_party_signIn">
         <i class="iconss pi pi-facebook"></i>
@@ -8,11 +8,11 @@
     <p>or use your account</p>
     <p-iconField iconPosition="left">
         <p-inputIcon styleClass="pi pi-envelope" />
-        <input type="text" pInputText placeholder="Email" class="input_field" name="email" ngModel #email="ngModel" required email/>
+        <input type="text" pInputText placeholder="Email" class="input_field" name="username" ngModel #username="ngModel" required email/>
     </p-iconField>
-    <div class="err_msg" *ngIf="email.invalid && (email.dirty) || (email.touched) ">
-        <p *ngIf="email.errors?.['required']">Email is required</p>
-        <p *ngIf="email.errors?.['email']">Invalid email</p>
+    <div class="err_msg" *ngIf="username.invalid && (username.dirty) || (username.touched) ">
+        <p *ngIf="username.errors?.['required']">Email is required</p>
+        <p *ngIf="username.errors?.['email']">Invalid email</p>
     </div>
 
     <p-iconField iconPosition="left">
@@ -24,7 +24,7 @@
        <p *ngIf="password.errors?.['minlength']">Password must contains atleast 8 characters long</p>
     </div>
     <p class="forget_password">Forget your password?</p>
-    <p-button label="Sign In" />
+    <p-button label="Sign In" (onClick)="authenticateInfo(loginForm)"/>
 </form>
 
   
