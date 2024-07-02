@@ -8,6 +8,15 @@ export class Register {
 }
 
 export class Login {
+     username!:string;
+     password!:string;
+}
 
+export class AuthResponse {
+    id!:string;
+    username!: string;
+    token!:string;
+    role!:string;
+    response!:string
 }
 

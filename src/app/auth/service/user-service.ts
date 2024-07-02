@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Register } from '../model/login';
+import { AuthResponse, Login, Register } from '../model/login';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private addUser = environment.apiUrl+'/user/add'
+  private addUser = environment.apiUrl+'/user/add';
+  private loginUrl = environment.apiUrl + '/user/login'
    
   constructor(private http : HttpClient) { }
 
@@ -16,4 +18,8 @@ export class UserService {
     return this.http.post(this.addUser , register)
   }
 
+  authenticate(login : Login): Observable<AuthResponse>{
+    // console.log("yessssssss")
+    return this.http.post<AuthResponse>(this.loginUrl , login)
+  }
 }
